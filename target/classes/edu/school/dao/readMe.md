@@ -1,0 +1,2 @@
+@Repository用于标注数据访问组件，即DAO组件
+包含Dao和DaoImpl

@@ -1,0 +1,1 @@
+由于只有在servlet > 3时，才支持Java方式配置DispachterServlet，所以单独建了servlet3包标明。

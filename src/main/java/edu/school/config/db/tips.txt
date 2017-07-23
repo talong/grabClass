@@ -1,0 +1,2 @@
+在Spring3.1中，只能在类级别上是用@Profile注解，所以像H2DataSource这样的DataSource配置类会有多个。不过，从Spring3.2开始，你也可以
+在方法级别上使用@Profile注解，与@Bean注解一起使用。这样的话，就能将多个@Profile的声明放到一个配置类中 。
