@@ -27,14 +27,14 @@ public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 
 
 	/**
-	 * ����Ŀ��������DispatcherServlet�ĳ�ʼ�����������弤���profile
-	 * ���ڼ��ɲ������ϣ�����ʹ��@ActiveProfilesע������ʹ�õ�profile
+	 * 设置激活的profile
+	 * 注解@ActiveProfiles可设置那些Bean会被实例化
 	 */
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
 		servletContext.setInitParameter("spring.profiles.default", "mysql");
-		servletContext.setInitParameter("spring.profiles.active", "mysql");
+		servletContext.setInitParameter("spring.profiles.active", "h2");
 	}
 	
 }
