@@ -20,7 +20,7 @@ public class StuRefCourseController {
 	@RequestMapping(value="getStu", method=RequestMethod.GET)
 	public @ResponseBody Student getStudentById() {
 		Student stu = StudentDao.queryById(1);
-		
+		 
 		return stu;
 	}
 	
