@@ -6,6 +6,6 @@ import edu.school.domain.Course;
 
 public interface CourseDao {
 
-	public Course queryById(String id);
+	public Course queryById(int id);
 
 }

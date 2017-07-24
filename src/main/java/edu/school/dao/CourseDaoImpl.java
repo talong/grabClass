@@ -13,7 +13,7 @@ public class CourseDaoImpl implements CourseDao {
     private CourseMapper courseMapper;
 
 	@Override
-	public Course queryById(String id) {
+	public Course queryById(int id) {
 		return courseMapper.selectByPrimaryKey(id);
 	}
 

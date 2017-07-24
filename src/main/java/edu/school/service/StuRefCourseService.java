@@ -54,7 +54,7 @@ public class StuRefCourseService {
     			
     			//当前课程是否已满
     			int course_limit_num = 0;
-    			Course course = courseDao.queryById(Integer.toString(course_id));
+    			Course course = courseDao.queryById(course_id);
     			if(course != null) {
     				course_limit_num = course.getNumber();
     				int course_already_num = 0;
