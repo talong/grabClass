@@ -14,8 +14,9 @@ public class StuRefCourseDaoImpl implements StuRefCourseDao {
     private StuRefCourseMapper stuRefCourseMapper;
 
 	@Override
-	public void insert(StuRefCourse stuRefCourse) {
-		stuRefCourseMapper.insert(stuRefCourse);
+	public int insert(StuRefCourse stuRefCourse) {
+		int value = stuRefCourseMapper.insert(stuRefCourse);
+		return value;
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class StuRefCourseDaoImpl implements StuRefCourseDao {
 	@Override
 	public int getCourseNum(int course_id) {
 		StuRefCourse src = new StuRefCourse();
-		src.setCourse_id(Long.valueOf(course_id));
+		src.setCourse_id(course_id);
 		return stuRefCourseMapper.selectCount(src);
 	}
 

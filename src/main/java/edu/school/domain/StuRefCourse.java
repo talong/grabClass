@@ -9,50 +9,52 @@ public class StuRefCourse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	  
 	@NotNull
-	private Long stu_id;
+	private Integer stu_id;
 
 	@NotNull
-	private Long course_id;
+	private Integer course_id;
 	  
 	  
 	public StuRefCourse() {}
 	  
-	public StuRefCourse(Long stu_id, Long course_id) {
+	public StuRefCourse(Integer stu_id, Integer course_id) {
 	    this(null, stu_id, course_id);
 	}
 
-	public StuRefCourse(Long id, Long stu_id, Long course_id) {
+	public StuRefCourse(Integer id, Integer stu_id, Integer course_id) {
 	    this.id = id;
 	    this.stu_id = stu_id;
 	    this.course_id = course_id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getStu_id() {
+	public Integer getStu_id() {
 		return stu_id;
 	}
 
-	public void setStu_id(Long stu_id) {
+	public void setStu_id(Integer stu_id) {
 		this.stu_id = stu_id;
 	}
 
-	public Long getCourse_id() {
+	public Integer getCourse_id() {
 		return course_id;
 	}
 
-	public void setCourse_id(Long course_id) {
+	public void setCourse_id(Integer course_id) {
 		this.course_id = course_id;
 	}
+
+	
 	
 
 }

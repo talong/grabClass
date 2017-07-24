@@ -10,14 +10,14 @@ import edu.school.dao.StudentDao;
 import edu.school.domain.Student;
 
 @Controller
-@RequestMapping({"/getStudent"})
+@RequestMapping({"/ref"})
 public class StuRefCourseController {
 
 	@Autowired
 	StudentDao StudentDao;
 	
 	
-	@RequestMapping( method=RequestMethod.GET)
+	@RequestMapping(value="getStu", method=RequestMethod.GET)
 	public @ResponseBody Student getStudentById() {
 		Student stu = StudentDao.queryById(1);
 		

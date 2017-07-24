@@ -12,7 +12,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	  
 	@NotNull
 	private String name;
@@ -26,25 +26,25 @@ public class Course {
 	  
 	public Course() {}
 	  
-	public Course(String name, String time_for_class, int number) {
+/*	public Course(String name, String time_for_class, int number) {
 	    this(null, name, time_for_class, number);
 	}
 
-	public Course(Long id, String name, String time_for_class, int number) {
+	public Course(Integer id, String name, String time_for_class, int number) {
 	    this.id = id;
 	    this.name = name;
 	    this.time_for_class = time_for_class;
 	    this.number = number;
-	}
+	}*/
 	  
 	
 
 	  
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

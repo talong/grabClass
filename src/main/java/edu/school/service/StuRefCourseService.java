@@ -7,6 +7,7 @@ import edu.school.dao.CourseDao;
 import edu.school.dao.StuRefCourseDao;
 import edu.school.dao.StudentDao;
 import edu.school.domain.Course;
+import edu.school.domain.StuRefCourse;
 import edu.school.domain.Student;
 import edu.school.exceptionAndHandler.CourseNotFoundException;
 import edu.school.exceptionAndHandler.StudentNotFoundException;
@@ -65,6 +66,13 @@ public class StuRefCourseService {
     					int time_exist = 0;
     					time_exist = stuRefCourseDao.getCountTime(stu_id, time_for_class);
     					
+    					if(time_exist == 0){
+    						//½øÐÐÑ¡¿Î
+    						StuRefCourse src = new StuRefCourse();
+    						src.setCourse_id(course_id);
+    						src.setStu_id(stu_id);
+    						int value = stuRefCourseDao.insert(src);
+    					}
     				}
     			}else{
     				throw new CourseNotFoundException(stu_id);

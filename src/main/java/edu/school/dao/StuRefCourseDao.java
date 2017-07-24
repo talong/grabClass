@@ -5,7 +5,7 @@ import edu.school.domain.StuRefCourse;
 
 public interface StuRefCourseDao {
 
-	public void insert(StuRefCourse stuRefCourse);
+	public int insert(StuRefCourse stuRefCourse);
 	
 	public int getGrabCourseNum(int stu_id, int course_id);
 	
