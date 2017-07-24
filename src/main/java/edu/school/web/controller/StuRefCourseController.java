@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.school.dao.CourseDao;
 import edu.school.dao.StudentDao;
+import edu.school.domain.Course;
 import edu.school.domain.Student;
 
 @Controller
@@ -14,14 +16,22 @@ import edu.school.domain.Student;
 public class StuRefCourseController {
 
 	@Autowired
-	StudentDao StudentDao;
+	StudentDao studentDao;
 	
+	@Autowired
+	CourseDao courseDao;
 	
 	@RequestMapping(value="getStu", method=RequestMethod.GET)
 	public @ResponseBody Student getStudentById() {
-		Student stu = StudentDao.queryById(1);
+		Student stu = studentDao.queryById(1);
 		 
 		return stu;
 	}
 	
+	@RequestMapping(value="getCourse", method=RequestMethod.GET)
+	public @ResponseBody Course getCourseById() {
+		Course course = courseDao.queryById(1);
+		 
+		return course;
+	}
 }
