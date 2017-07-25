@@ -21,7 +21,7 @@
 		<logback.version>1.1.3</logback.version>
 		<jcl.slf4j.version>1.7.12</jcl.slf4j.version>
 		<jstl.version>1.2</jstl.version>
-		<servletapi.version>3.1.0</servletapi.version>
+		<servletapi.version>3.0.1</servletapi.version>
 		<junit.version>4.12</junit.version>
 		<dbcp.version>2.1</dbcp.version>
 		<mybatis.version>3.2.8</mybatis.version>

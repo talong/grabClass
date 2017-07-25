@@ -9,7 +9,8 @@ HSQLDB 2.3.2 (嵌入式数据库 用于开发阶段)
 H2 1.4.187 (嵌入式数据库 用于开发阶段)
 Derby 10.11.1.1 (嵌入式数据库 用于开发阶段)
 Mysql 5.1.32
-Servlet3.1.0
+Servlet3.1.0 改为 3.0.1 因为在eclipse中Run on Server(Tomcat7)时提示error: The server does not support version 3.1 of the J2EE Web   module specification,似乎是当前没有Server支持3.1(https://stackoverflow.com/questions/29997868/error-the-server-does-not-support-version-3-1-of-the-j2ee-web-module-specificat)注意： project -> Properties -> Project Facets then set Dynamic Web Module to 3.0这里改为3.0
+
 Mybatis 3.2.8
 Mapper 3.2.4(支持单表操作，不支持通用的多表联合查询)  https://github.com/abel533/Mapper
 
