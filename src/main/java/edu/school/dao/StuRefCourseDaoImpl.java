@@ -23,9 +23,7 @@ public class StuRefCourseDaoImpl implements StuRefCourseDao {
 	public int getGrabCourseNum(int stu_id, int course_id) {
 		Example example = new Example(StuRefCourse.class);
 
-        example.setOrderByClause("created DESC");
-        example.createCriteria().andEqualTo("stu_id", stu_id);
-        example.createCriteria().andEqualTo("course_id", course_id);
+        example.createCriteria().andEqualTo("stu_id", stu_id).andEqualTo("course_id", course_id);
 		return stuRefCourseMapper.selectCountByExample(example);
 	}
 
@@ -41,7 +39,13 @@ public class StuRefCourseDaoImpl implements StuRefCourseDao {
 		
 		return 0;
 	}
-    
+
+	@Override
+	public int getGrabCourseNum(int stu_id) {
+		StuRefCourse src = new StuRefCourse();
+		src.setStu_id(stu_id);
+		return stuRefCourseMapper.selectCount(src);
+	}
 
 
 }

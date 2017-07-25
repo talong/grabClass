@@ -13,4 +13,7 @@ public interface StuRefCourseDao {
 
 	public int getCountTime(int stu_id, String time_for_class);
 
+	public int getGrabCourseNum(int stu_id);
+
+
 }
