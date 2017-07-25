@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.school.domain.StuRefCourse;
+import edu.school.exceptionAndHandler.DuplicateException;
+import edu.school.exceptionAndHandler.GrabCourseNumLimitException;
+import edu.school.exceptionAndHandler.NoPlaceException;
 import edu.school.exceptionAndHandler.StudentNotFoundException;
 import edu.school.modle.MyError;
 import edu.school.service.StuRefCourseService;
@@ -42,4 +45,26 @@ public class StuRefCourseRestfulController {
 		long studentId = e.getStuId();
 		return new MyError(4, "Student[" + studentId + "] not found");
 	}
+	
+	@ExceptionHandler(GrabCourseNumLimitException.class)
+	public @ResponseBody MyError grabCourseNumLimit(
+			GrabCourseNumLimitException e) {
+		return new MyError(4, "超出允许选课数量");
+	}
+	
+	@ExceptionHandler(NoPlaceException.class)
+	public @ResponseBody MyError noPlace(
+			NoPlaceException e) {
+		long courseId = e.getCourseId();
+		return new MyError(4, "Course[" + courseId + "] 选课人数已满");
+	}
+	
+	@ExceptionHandler(DuplicateException.class)
+	public @ResponseBody MyError duplicate(
+			DuplicateException e) {
+		long courseId = e.getCourseId();
+		long stuId = e.getStuId();
+		return new MyError(4, "Student[" + stuId + "] 已选Course[" + courseId + "]");
+	}
+	
 }
