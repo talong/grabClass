@@ -1,0 +1,1 @@
+查看线程状态jstack -l 6368 >> D:/temp/temp.dump
