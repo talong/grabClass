@@ -15,7 +15,7 @@ import edu.school.exceptionAndHandler.GrabCourseNumLimitException;
 import edu.school.exceptionAndHandler.NoPlaceException;
 import edu.school.exceptionAndHandler.StudentNotFoundException;
 
-@Service   //ÊµÏÖ¾ßÌåµÄÒµÎñÂß¼­
+@Service   //å®ç°å…·ä½“çš„ä¸šåŠ¡é€»è¾‘
 public class StuRefCourseService {
 
     @Autowired
@@ -28,20 +28,20 @@ public class StuRefCourseService {
     private CourseDao courseDao;
     
     /**
-     * ¾ßÌåµÄÑ¡¿ÎÂß¼­ÊµÏÖ
-     * Ò»¸öÑ§ÉúÊÇ·ñÄÜÑ¡¸ÃÃÅ¿Î´æÔÚ¶à¸öÌõ¼şÅĞ¶Ï£¬ÀıÈç£ºa.Ñ¡¿ÎÊıÁ¿ÊÇ·ñ³¬¹ıÏŞÖÆ  b.µ±Ç°ËùÑ¡¿ÎÊÇ·ñÓëÒÑÑ¡¿Î³åÍ»  c.µ±Ç°¿Î³ÌÊÇ·ñÒÑÂú£¬½«ÕâĞ©ÅĞ¶Ï²¢·¢Ö´ĞĞ
-     * (ÕâÈı¸öÅĞ¶ÏÓĞÒ»¸ö²»Âú×ã¾Í¿ÉÒÔ²»ÓÃÖ´ĞĞÆäËûÁ½¸öÏß³Ì¼°ºóĞøÖ´ĞĞ£¬Ê¹ÓÃÏß³ÌµÄÖĞ¶ÏÂğ£¿)£¬
-     * È«²¿Ö´ĞĞÍê²ÅÄÜÖ´ĞĞºóĞøÑ¡¿ÎµÄĞ´²Ù×÷£¬ÕâÀï¿ÉÒÔ²ÉÓÃCountDownLatchÊ¹Ğ´²Ù×÷ÔÚÆäËûÏß³ÌÖ´ĞĞÍêºóÔÙÖ´ĞĞ¡£ÓÉÓÚ²¢·¢Ö´ĞĞ£¬ĞèÒª²ÉÓÃÊÂÎñ¸ôÀë¼¶±ğ
-     * Serializable (´®ĞĞ»¯)À´±ÜÃâÔà¶Á¡¢²»¿ÉÖØ¸´¶Á¡¢»Ã¶ÁµÄ·¢Éú¡££¨ÕâÀïÊÇÒ»¸öÊÂÎñ£©
+     * å…·ä½“çš„é€‰è¯¾é€»è¾‘å®ç°
+     * ä¸€ä¸ªå­¦ç”Ÿæ˜¯å¦èƒ½é€‰è¯¥é—¨è¯¾å­˜åœ¨å¤šä¸ªæ¡ä»¶åˆ¤æ–­ï¼Œä¾‹å¦‚ï¼ša.é€‰è¯¾æ•°é‡æ˜¯å¦è¶…è¿‡é™åˆ¶  b.å½“å‰æ‰€é€‰è¯¾æ˜¯å¦ä¸å·²é€‰è¯¾å†²çª  c.å½“å‰è¯¾ç¨‹æ˜¯å¦å·²æ»¡ï¼Œå°†è¿™äº›åˆ¤æ–­å¹¶å‘æ‰§è¡Œ
+     * (è¿™ä¸‰ä¸ªåˆ¤æ–­æœ‰ä¸€ä¸ªä¸æ»¡è¶³å°±å¯ä»¥ä¸ç”¨æ‰§è¡Œå…¶ä»–ä¸¤ä¸ªçº¿ç¨‹åŠåç»­æ‰§è¡Œï¼Œä½¿ç”¨çº¿ç¨‹çš„ä¸­æ–­å—ï¼Ÿ)ï¼Œ
+     * å…¨éƒ¨æ‰§è¡Œå®Œæ‰èƒ½æ‰§è¡Œåç»­é€‰è¯¾çš„å†™æ“ä½œï¼Œè¿™é‡Œå¯ä»¥é‡‡ç”¨CountDownLatchä½¿å†™æ“ä½œåœ¨å…¶ä»–çº¿ç¨‹æ‰§è¡Œå®Œåå†æ‰§è¡Œã€‚ç”±äºå¹¶å‘æ‰§è¡Œï¼Œéœ€è¦é‡‡ç”¨äº‹åŠ¡éš”ç¦»çº§åˆ«
+     * Serializable (ä¸²è¡ŒåŒ–)æ¥é¿å…è„è¯»ã€ä¸å¯é‡å¤è¯»ã€å¹»è¯»çš„å‘ç”Ÿã€‚ï¼ˆè¿™é‡Œæ˜¯ä¸€ä¸ªäº‹åŠ¡ï¼‰
      * 
-     * µ±Ç°·½·¨ÔÚ²¢·¢Çé¿öÏÂ»á³öÏÖÊı¾İ´íÂÒ£¬Ô­Òò£º¿Î³ÌµÄÊıÁ¿ÊÇ¹²Ïí±äÁ¿¡¢Ñ§Éú¿ÉÑ¡¿ÎÊıÁ¿ÊÇ¹²Ïí±äÁ¿  ¹ÊÊ¹ÓÃsynchronized½«·½·¨ÏŞÖÆÎªÍ¬²½
+     * å½“å‰æ–¹æ³•åœ¨å¹¶å‘æƒ…å†µä¸‹ä¼šå‡ºç°æ•°æ®é”™ä¹±ï¼ŒåŸå› ï¼šè¯¾ç¨‹çš„æ•°é‡æ˜¯å…±äº«å˜é‡ã€å­¦ç”Ÿå¯é€‰è¯¾æ•°é‡æ˜¯å…±äº«å˜é‡  æ•…ä½¿ç”¨synchronizedå°†æ–¹æ³•é™åˆ¶ä¸ºåŒæ­¥
      * @param stu_id
      * @param Course_id
      * @return
      */
     public synchronized void grabCourse(int stu_id, int course_id) {
     	System.out.println("stu_id=" + stu_id + ",course_id=" + course_id);
-    	//µ±Ç°ÔÊĞíÑ¡¿ÎÊıÁ¿
+    	//å½“å‰å…è®¸é€‰è¯¾æ•°é‡
     	int grab_course_num = 0;
     	Student stu = studentDao.queryById(stu_id);
     	if(stu != null) {
@@ -52,13 +52,13 @@ public class StuRefCourseService {
     	
     	
     	if(grab_course_num != 0){
-    		//µ±Ç°ÒÑÑ¡¿ÎÊıÁ¿
+    		//å½“å‰å·²é€‰è¯¾æ•°é‡
     		int grab_course_num_already = 0;
     		grab_course_num_already = stuRefCourseDao.getGrabCourseNum(stu_id);
     		
     		if(grab_course_num > grab_course_num_already){
     			
-    			//µ±Ç°¿Î³ÌÊÇ·ñÒÑÂú
+    			//å½“å‰è¯¾ç¨‹æ˜¯å¦å·²æ»¡
     			int course_limit_num = 0;
     			Course course = courseDao.queryById(course_id);
     			if(course != null) {
@@ -67,18 +67,18 @@ public class StuRefCourseService {
     				course_already_num = stuRefCourseDao.getCourseNum(course_id);
     				if(course_already_num < course_limit_num){
     					
-    					//µ±Ç°ËùÑ¡¿ÎÊÇ·ñÓëÒÑÑ¡¿Î³åÍ»
+    					//å½“å‰æ‰€é€‰è¯¾æ˜¯å¦ä¸å·²é€‰è¯¾å†²çª
     					String time_for_class = course.getTime_for_class();
     					int time_exist = 0;
-    					//ĞèÒª¶à±íÁªºÏ²éÑ¯£¬ÔİÎ´ÊµÏÖ
+    					//éœ€è¦å¤šè¡¨è”åˆæŸ¥è¯¢ï¼Œæš‚æœªå®ç°
     					time_exist = stuRefCourseDao.getCountTime(stu_id, time_for_class);
     					int isMoreThenOne = 0;
-    					//²»ÄÜÑ¡Í¬Ò»ÃÅ¿Î¶àÓÚÒ»´Î
+    					//ä¸èƒ½é€‰åŒä¸€é—¨è¯¾å¤šäºä¸€æ¬¡
     					isMoreThenOne = stuRefCourseDao.getGrabCourseNum(stu_id, course_id);
     					
     					
     					if(time_exist == 0 && isMoreThenOne == 0){
-    						//½øĞĞÑ¡¿Î
+    						//è¿›è¡Œé€‰è¯¾
     						StuRefCourse src = new StuRefCourse();
     						src.setCourse_id(course_id);
     						src.setStu_id(stu_id);
