@@ -1,10 +1,12 @@
 package edu.school.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.stereotype.Service;
 
 import edu.school.dao.CourseDao;
 import edu.school.dao.StuRefCourseDao;
+import edu.school.dao.StuRefCourseRepository;
 import edu.school.dao.StudentDao;
 import edu.school.domain.Course;
 import edu.school.domain.StuRefCourse;
@@ -27,6 +29,13 @@ public class StuRefCourseService {
     @Autowired
     private CourseDao courseDao;
     
+    //@Autowired
+	//private RedisTemplate<String, StuRefCourse> redis;
+    @Autowired
+    private StuRefCourseRepository redisRepository;
+    
+    @Autowired(required = false) RedisConnectionFactory redisConnectionFactory;
+    
     /**
      * 具体的选课逻辑实现
      * 一个学生是否能选该门课存在多个条件判断，例如：a.选课数量是否超过限制  b.当前所选课是否与已选课冲突  c.当前课程是否已满，将这些判断并发执行
@@ -35,12 +44,14 @@ public class StuRefCourseService {
      * Serializable (串行化)来避免脏读、不可重复读、幻读的发生。（这里是一个事务）
      * 
      * 当前方法在并发情况下会出现数据错乱，原因：课程的数量是共享变量、学生可选课数量是共享变量  故使用synchronized将方法限制为同步
+     * 将insert对象写入redis
      * @param stu_id
      * @param Course_id
      * @return
      */
-    public synchronized void grabCourse(int stu_id, int course_id) {
-    	System.out.println("stu_id=" + stu_id + ",course_id=" + course_id);
+    public synchronized StuRefCourse grabCourse(int stu_id, int course_id) {
+    	
+    	StuRefCourse src = new StuRefCourse();
     	//当前允许选课数量
     	int grab_course_num = 0;
     	Student stu = studentDao.queryById(stu_id);
@@ -79,11 +90,32 @@ public class StuRefCourseService {
     					
     					if(time_exist == 0 && isMoreThenOne == 0){
     						//进行选课
-    						StuRefCourse src = new StuRefCourse();
     						src.setCourse_id(course_id);
     						src.setStu_id(stu_id);
     						//System.out.println("stu_id=" + stu_id + ",course_id=" + course_id);
     						int value = stuRefCourseDao.insert(src);
+    						
+    						
+    						if(value == 1) {
+    							src = stuRefCourseDao.getStuRefCourse(src);
+    							System.out.println("stu_id=" + stu_id + ",course_id=" + course_id);
+    							try{
+    								//防止缓存操作失败影响正常流程
+    								//redis.opsForValue().set(src.getSrcKey(), src);
+    								redisRepository.save(src);
+    								src = stuRefCourseDao.getStuRefCourse(src);
+    								//StuRefCourse src_redis = redis.opsForValue().get(src.getSrcKey());
+    								StuRefCourse src_redis = redisRepository.findOne(src.getId().toString());//使用缓存注解后无法使用
+    								System.out.println("redis=" + src_redis.toString());
+    								
+    								
+    							}catch(Exception e) {
+    								e.printStackTrace();
+    							}
+    							
+    						}
+    						
+    						
     					}else{
     						throw new DuplicateException(stu_id, course_id);
     					}
@@ -99,7 +131,7 @@ public class StuRefCourseService {
     		}
     		
     	}
-    	
+    	return src;
     }
     
 }
