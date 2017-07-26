@@ -15,5 +15,7 @@ public interface StuRefCourseDao {
 
 	public int getGrabCourseNum(int stu_id);
 
+	public StuRefCourse getStuRefCourse(StuRefCourse stuRefCourse);
+
 
 }

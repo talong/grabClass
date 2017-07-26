@@ -1,6 +1,8 @@
 package edu.school.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Repository;
 
 import tk.mybatis.mapper.entity.Example;
@@ -26,7 +28,13 @@ public class StuRefCourseDaoImpl implements StuRefCourseDao {
         example.createCriteria().andEqualTo("stu_id", stu_id).andEqualTo("course_id", course_id);
 		return stuRefCourseMapper.selectCountByExample(example);
 	}
+	
+	@Override
+	public StuRefCourse getStuRefCourse(StuRefCourse stuRefCourse) {
+		return stuRefCourseMapper.selectOne(stuRefCourse);
+	}
 
+	
 	@Override
 	public int getCourseNum(int course_id) {
 		StuRefCourse src = new StuRefCourse();
