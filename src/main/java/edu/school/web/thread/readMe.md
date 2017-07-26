@@ -17,6 +17,10 @@ Tomcat 默认为bio模式，    <Connector port="8080" protocol="HTTP/1.1" conne
 设置maxQueueSize官方解释：(int) The maximum number of runnable tasks that can queue up awaiting execution before we reject them. Default value is Integer.MAX_VALUE，这里应该不是指的tomcat的连接数？
 增加maxThreads到1000反而出现更多Connection refused: connect，暂时只能支持到6000左右的http并发请求。
 
+怀疑是由于启动10000个线程也占用了Tomcat的线程并影响到了可接受连接数，故改为main方法执行发起10000HTTP请求，结果10000请求正常通过。增加到12000依旧正常通过，
+但13000开始出现Connection refused: connect。期间cup100%，内存仍留有1G左右空闲，有篇关于JVM最大线程数的文章http://jzhihui.iteye.com/blog/1271122，在不考虑系统限制的情况下，linux系统jvm最大线程数32000左右，增大堆内存（-Xms，-Xmx）会减少可创建的线程数量，增大线程栈内存（-Xss，32位系统中此参数值最小为60K）也会减少可创建的线程数量。
+
+
 
 结合Tomcat管理页面查看http://localhost:8080/manager/status
 JVM
