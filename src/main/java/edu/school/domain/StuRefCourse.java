@@ -1,13 +1,20 @@
 package edu.school.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-public class StuRefCourse {
+import org.springframework.data.redis.core.RedisHash;
 
-    @Id
+@RedisHash("stuRefCourse")
+public class StuRefCourse implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	  
@@ -54,7 +61,13 @@ public class StuRefCourse {
 		this.course_id = course_id;
 	}
 
+	public String getSrcKey() {
+		return "StuRefCourse" + id + stu_id + course_id;
+	}
 	
+    public String toString(){
+		return "id=" + id + ",stu_id=" + stu_id + ",course_id=" + course_id;
+    	
+    }
 	
-
 }
