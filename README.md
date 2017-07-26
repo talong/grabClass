@@ -1,6 +1,6 @@
 # grabClass
 ===============================  
-选课项目 Spring + Spring MVC + Mybatis(Embedded database\Mysql) 注解+Java实现方式，无XML
+抢课项目 Spring + Spring MVC + Mybatis(Embedded database\Mysql) 注解+Java实现方式，无XML
 
 ###1. 包含的技术
 
