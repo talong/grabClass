@@ -25,13 +25,6 @@ public class RedisConfig {
 		return cf;
 	}
 	
-/*	@Bean
-	public RedisTemplate<String, StuRefCourse> redisTemplate(RedisConnectionFactory cf) {
-		RedisTemplate<String, StuRefCourse> redis = new RedisTemplate<String, StuRefCourse>();
-		redis.setConnectionFactory(cf);
-		return redis;
-	}*/
-	
 	@Bean
 	public RedisTemplate<?, ?> redisTemplate() {
 
