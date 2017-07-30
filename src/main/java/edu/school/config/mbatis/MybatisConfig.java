@@ -31,9 +31,9 @@ public class MybatisConfig {
 		
 		MapperScannerConfigurer sfb = new MapperScannerConfigurer();
 		sfb.setBasePackage("edu.school.mapper");
-		Properties props = new Properties();
+/*		Properties props = new Properties();
 		props.setProperty("mappers", "tk.mybatis.mapper.common.Mapper");
-		sfb.setProperties(props);
+		sfb.setProperties(props);*/
 		return sfb;
 		
 	}
