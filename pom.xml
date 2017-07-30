@@ -88,6 +88,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
 		  <groupId>org.springframework.data</groupId>
 		  <artifactId>spring-data-redis</artifactId>
 		  <version>1.8.4.RELEASE</version>
@@ -139,6 +145,13 @@
 			<version>${mybatis.spring.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
+		<dependency>
+		    <groupId>org.apache.activemq</groupId>
+		    <artifactId>activemq-core</artifactId>
+		    <version>5.7.0</version>
+		</dependency>
+
 		<!--  connection polls -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -152,11 +165,11 @@
 			<version>${jcl.slf4j.version}</version>
 		</dependency>
 
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
 		<dependency>
