@@ -2,6 +2,7 @@ package edu.school.web.thread;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CyclicBarrier;
@@ -78,9 +79,9 @@ public class StuRefCourseThreadController {
 	        }
 	    };
 	    Thread producerThread = new Thread(producerRunnable);
-	    //Thread customerThread = new Thread(customerRunnable);
+	    Thread customerThread = new Thread(customerRunnable);
 	    producerThread.start();
-	    //customerThread.start();
+	    customerThread.start();
 		
 		
 	}
@@ -128,4 +129,53 @@ public class StuRefCourseThreadController {
 		
 		System.out.println("结束");
 	}
+	
+	public static void main(String args[]){
+		System.out.print("输入");
+		Scanner scan = new Scanner(System.in);
+		String read = scan.nextLine();
+		System.out.println("输入数据："+read); 
+		int num = Integer.parseInt(read);
+		
+		ExecutorService service = Executors.newCachedThreadPool();
+		
+		final CyclicBarrier barrier = new CyclicBarrier(num);
+		
+		for(int k = 0; k < num; k++){
+			
+			Thread thread = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					System.out.println("Worker's waiting");
+					try {
+						//线程在这里等待，直到所有线程都到达barrier。
+						barrier.await();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} catch (BrokenBarrierException e) {
+						e.printStackTrace();
+					}
+					
+					Random r = new Random();
+					int stu_id = r.nextInt(3) + 1;
+					int course_id = r.nextInt(3) + 1;
+					String parm = "stu_id=" + stu_id + "&course_id=" + course_id;
+					String str = "";
+					str = HttpRequest.sendGet("http://localhost:8080/grabclass/refRest", parm);
+					System.out.println("HTTP返回结果：" + str);
+				}
+			});
+			
+			thread.start();
+			/*try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}*/
+		}
+		
+		System.out.println("结束");
+	}
+	
 }
