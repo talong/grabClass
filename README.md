@@ -18,10 +18,12 @@
 *activemq-core 5.7.0 
 
 
+
 注意：本Demo使用了Servlet3.0.1，因为Servlet3规范以下的Servlet容器不支持使用Java方式的DispatcherServlet配置，Tomcat版本>=7。
 
 ###2. 如何本地运行本Demo
-
+安装activemq并运行（activemq start）
+安装redis-server并运行
 $ git clone https://github.com/talong/grabClass.git
 $ mvn tomcat7:run
 
