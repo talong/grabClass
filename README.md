@@ -18,6 +18,15 @@
 *activemq-core 5.7.0 
 
 
+待实现：
+*webSocket
+*vue实现与大白机器人智能对话
+*整合rpc（使用springBoot启动另一个项目提供rpc服务）主要是为了理解douboo
+*编写一个使用代理模式的程序代码（远程代理、保护代理、智能引用代理）
+*java基础
+ 
+
+
 
 注意：本Demo使用了Servlet3.0.1，因为Servlet3规范以下的Servlet容器不支持使用Java方式的DispatcherServlet配置，Tomcat版本>=7。
 
