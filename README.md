@@ -33,7 +33,7 @@
 ###2. 如何本地运行本Demo    
 安装activemq并运行（activemq start）  
 安装redis-server并运行   
-$ git clone https://github.com/talong/grabClass.git
+$ git clone https://github.com/talong/grabClass.git  
 $ mvn tomcat7:run
 
 Access http://localhost:8080/grabclass
