@@ -1,10 +1,13 @@
 package edu.school.dao;
 
+import org.springframework.cache.annotation.CachePut;
+
 import edu.school.domain.StuRefCourse;
 
 
 public interface StuRefCourseDao {
 
+	@CachePut(value = "stuRefCourse", key = "#result.id")
 	public int insert(StuRefCourse stuRefCourse);
 	
 	public int getGrabCourseNum(int stu_id, int course_id);

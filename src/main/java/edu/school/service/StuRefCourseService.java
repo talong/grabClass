@@ -92,7 +92,6 @@ public class StuRefCourseService {
     						//进行选课
     						src.setCourse_id(course_id);
     						src.setStu_id(stu_id);
-    						//System.out.println("stu_id=" + stu_id + ",course_id=" + course_id);
     						int value = stuRefCourseDao.insert(src);
     						
     						
@@ -101,20 +100,15 @@ public class StuRefCourseService {
     							System.out.println("stu_id=" + stu_id + ",course_id=" + course_id);
     							try{
     								//防止缓存操作失败影响正常流程
-    								//redis.opsForValue().set(src.getSrcKey(), src);
     								redisRepository.save(src);
     								src = stuRefCourseDao.getStuRefCourse(src);
-    								//StuRefCourse src_redis = redis.opsForValue().get(src.getSrcKey());
     								StuRefCourse src_redis = redisRepository.findOne(src.getId().toString());//使用缓存注解后无法使用
     								System.out.println("redis=" + src_redis.toString());
-    								
-    								
     							}catch(Exception e) {
     								e.printStackTrace();
     							}
     							
     						}
-    						
     						
     					}else{
     						throw new DuplicateException(stu_id, course_id);

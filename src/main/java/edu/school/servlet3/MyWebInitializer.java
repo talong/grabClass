@@ -34,7 +34,7 @@ public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
 		servletContext.setInitParameter("spring.profiles.default", "mysql");
-		servletContext.setInitParameter("spring.profiles.active", "mysql");
+		servletContext.setInitParameter("spring.profiles.active", "h2");
 	}
 	
 }
