@@ -24,7 +24,7 @@
 		<servletapi.version>3.0.1</servletapi.version>
 		<junit.version>4.12</junit.version>
 		<dbcp.version>2.1</dbcp.version>
-		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 	    <mybatis.spring.version>1.2.2</mybatis.spring.version>
 	    <commons-lang3.version>3.3.2</commons-lang3.version>
 	    <commons-io.version>1.3.2</commons-io.version>
